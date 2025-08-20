@@ -642,3 +642,12 @@ footer .author {
     visibility: hidden;
     transform: translateY(0px);
 }
+.date {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+#lastmodified {
+    color: blue;
+}
