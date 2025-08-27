@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -126,7 +129,7 @@
                 <input type = "submit" value = "Login"  style="border: none;  padding: 8px; border-radius: 4px; background-color: black; color: white; cursor: pointer;">
               </div>
               <div class="fp-card">
-                <a href="create-account.html" style="text-decoration: none; padding-top: 15px; color: black; font-size: 12px;">Create Account</a>
+                <a href="create-account.php" style="text-decoration: none; padding-top: 15px; color: black; font-size: 12px;">Create Account</a>
               </div>
               <div class="fp-card" id="fgp-card" >
                 <a href="#fp-modal"  style="text-decoration: none; padding-top: 15px; color: black; font-size: 12px;">Forgot Password</a>
@@ -137,7 +140,7 @@
         <!-- MODALS -->
         <div id="fp-modal" class="modal">
           <div class="modal-content">
-            <a href="new-password.html" class="fp">&times;</a>
+            <a href="new-password.php" class="fp">&times;</a>
             <h4>Forgot Password</h4>
             <form id="form">
               <label for="email">Email Address:</label>

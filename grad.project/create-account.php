@@ -1,3 +1,42 @@
+
+<?php // first thing to do before the connection
+$host = "localhost"; // It specify the host for the site
+$user = "root" ; // by default, but it can be changed
+$password = ""; // by default is empty
+$dbname = "practice_page";
+
+// the connection
+$conn = new mysqli ($host, $user, $password, $dbname);
+
+// to check if the connection has errors.(what will display if what filled are wrong)
+if ( $conn->connect_error) {
+    die("connection failed" .$conn->connect_error);
+}
+//to prevent sql injection
+if ($_SERVER ["REQUEST_METHOD"] == "POST") {
+$first_name   = $conn->real_escape_string($_POST['first_name']);
+$middle_name  = $conn->real_escape_string($_POST['middle_name']);
+$last_name    = $conn->real_escape_string($_POST['last_name']);
+$email        = $conn->real_escape_string($_POST['email']);
+$password        = $conn->real_escape_string($_POST['password']);
+$password_hash        = password_hash($password, PASSWORD_BCRYPT);
+$phone_number = $conn->real_escape_string($_POST['phone_number']);
+$address      = $conn->real_escape_string($_POST['address']);
+
+// for insertion (for db)
+$sql = "INSERT INTO student (first_name, middle_name, last_name, email, password_hash, phone_number, address)  
+            VALUES ('$first_name', '$middle_name', '$last_name', '$email','$password_hash', '$phone_number', '$address')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>alert('Account Successfully Created'); window.location.href= 'index.php';</script>";
+    } else {
+        echo "<script>alert('error: " . $conn->error . "');</script>";
+    }
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -242,30 +281,34 @@
         
         <div class="form-container">
             <h2>Create your account</h2>
-            <form action="mailto:danfred@gmail.com" method="post">
+            <form action="" method="post">
                 <div class="form-group">
-                <label for="fname">First Name*</label>
-                <input type="text" id="fname" name="fname" placeholder="First name" required>
+                <label for="fname">First Name</label>
+                <input type="text" id="first_name" name="first_name" placeholder="First name" required>
                 </div>
                 <div class="form-group">
                 <label for="mname">Middle Name</label>
-                <input type="text" id="mname" name="mname" placeholder="Middle name">
+                <input type="text" id = "middle_name" name = "middle_name" placeholder="Middle name">
                 </div>
                 <div class="form-group">
                 <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lname" placeholder="Last name">
+                <input type="text" id = "last_name" name = "last_name" placeholder="Last name">
                 </div>
                 <div class="form-group">
-                <label for="email">Email*</label>
-                <input type="email" id="email" name="email" placeholder="Email" required>
+                <label for="email">Email</label>
+                <input type="email" id = "email" name = "email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id = "password" name = "password" placeholder="Password" required>
                 </div>
                 <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="Phone number">
+                <input type="tel" id = "phone_number" name = "phone_number" placeholder="Phone number">
                 </div>
                 <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" id="address" name="address" placeholder="Address">
+                <input type="text" id = "address" name = "address" placeholder="Address">
                 </div>
                 <div class="submit-button">
                 <input type="submit" value="Create Account">
