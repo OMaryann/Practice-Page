@@ -160,7 +160,7 @@ $conn->close();
         <div class="form-container">
         <h2>Login</h2><br><br>
         <p1>Sign in to start your session</p1><br><br>
-        <form action="" method=" post">
+        <form action="" method="post">
             <div class="input">
                 <label for="email" required><i class="material-icons">email</i>  </label> 
                 <input type="email" style="width: 125%; height: 25px; " id="email" name="email" placeholder="Email" ><br> <br><br>
