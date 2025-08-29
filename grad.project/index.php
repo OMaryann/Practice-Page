@@ -1,4 +1,49 @@
 <?php
+$host = "localhost"; // It specify the host for the site
+$user = "root" ; // by default, but it can be changed
+$password = ""; // by default is empty
+$dbname = "practice_page";
+
+// the connection
+$conn = new mysqli ($host, $user, $password, $dbname);
+
+// to check if the connection has errors.(what will display if what filled are wrong)
+if ( $conn->connect_error) {
+    die("connection failed" .$conn->connect_error);
+}
+
+//to initialize an error
+$error = "";
+if ($_SERVER ["REQUEST_METHOD"] == "POST") {
+$email        = $conn->real_escape_string($_POST['email']);
+$password        = $conn->real_escape_string($_POST['password']);
+  
+// for insertion (for db) for email
+$sql = "SELECT id, first_name, password FROM student WHERE email = $email, LIMIT 1";
+$result = $conn->query($sql);
+
+// For password (to fetch data that aligns with the row)
+if ($result && $result->num_rows === 1) {
+    $row = $result->fetch_assoc();
+    $password_hash = $row['password_hash'];
+
+    if (password_verify($password, $password_hash)) {
+        // If password is correct, create a session
+        session_start(); // Make sure session is started before setting session vars
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['user_name'] = $row['first_name'];
+        header("Location: home.php");
+        exit();
+    } else {
+        $error = "Invalid email or password.";
+    }
+} else {
+    $error = "Invalid email or password.";
+}
+
+}
+
+$conn->close();
 
 ?>
 <!DOCTYPE html>
@@ -115,10 +160,10 @@
         <div class="form-container">
         <h2>Login</h2><br><br>
         <p1>Sign in to start your session</p1><br><br>
-        <form action="mailto:danfred@gmail.com" method=" post">
+        <form action="" method=" post">
             <div class="input">
-                <label for="username" required><i class="material-icons">person</i>  </label> 
-                <input type="text" style="width: 125%; height: 25px; " id="username" name="username" placeholder="User name" ><br> <br><br>
+                <label for="email" required><i class="material-icons">email</i>  </label> 
+                <input type="email" style="width: 125%; height: 25px; " id="email" name="email" placeholder="Email" ><br> <br><br>
             </div>
             <div class="input">
                 <label for="password"><i class="material-icons">lock</i></label> 

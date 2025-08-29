@@ -246,7 +246,7 @@ $conn->close();
     <!-- Navigation Links -->
     <div class="collapse navbar-collapse navbar-right" id="main-navbar">
       <ul class="headlines">
-        <li><a href="#home"><b>Home</b></a></li>
+        <li><a href="home.php"><b>Home</b></a></li>
         <li><a href="#attendance-list"><b>Attendance List</b></a></li>
         <li><a href="#courses"><b>Courses</b></a></li>
         <li><a href="#create-account"><b>Create Account</b></a></li>
