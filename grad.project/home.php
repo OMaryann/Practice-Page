@@ -1,3 +1,8 @@
+<?php
+// Optional: Start session (useful later if you want login/logout features)
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

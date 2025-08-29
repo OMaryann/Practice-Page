@@ -1,48 +1,48 @@
+<?php
+// Database connection
+$host = "localhost";  // change if not local
+$user = "root";       // your MySQL username
+$pass = "";           // your MySQL password
+$dbname = "DCE_student";
 
-<?php // first thing to do before the connection
-$host = "localhost"; // It specify the host for the site
-$user = "root" ; // by default, but it can be changed
-$password = ""; // by default is empty
-$dbname = "practice_page";
+// Create connection
+$conn = new mysqli($host, $user, $pass, $dbname);
 
-// the connection
-$conn = new mysqli ($host, $user, $password, $dbname);
-
-// to check if the connection has errors.(what will display if what filled are wrong)
-if ( $conn->connect_error) {
-    die("connection failed" .$conn->connect_error);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-//to prevent sql injection
-if ($_SERVER ["REQUEST_METHOD"] == "POST") {
-$first_name   = $conn->real_escape_string($_POST['first_name']);
-$middle_name  = $conn->real_escape_string($_POST['middle_name']);
-$last_name    = $conn->real_escape_string($_POST['last_name']);
-$email        = $conn->real_escape_string($_POST['email']);
-$password        = $conn->real_escape_string($_POST['password']);
-$password_hash        = password_hash($password, PASSWORD_BCRYPT);
-$phone_number = $conn->real_escape_string($_POST['phone_number']);
-$address      = $conn->real_escape_string($_POST['address']);
 
-// for insertion (for db)
-$sql = "INSERT INTO student (first_name, middle_name, last_name, email, password_hash, phone_number, address)  
-            VALUES ('$first_name', '$middle_name', '$last_name', '$email','$password_hash', '$phone_number', '$address')";
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $fname = $conn->real_escape_string($_POST['fname']);
+    $mname = $conn->real_escape_string($_POST['mname']);
+    $lname = $conn->real_escape_string($_POST['lname']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $phone = $conn->real_escape_string($_POST['phone']);
+    $address = $conn->real_escape_string($_POST['address']);
+    $password = $conn->real_escape_string($_POST['password']);
+    $password_hash = password_hash($password, PASSWORD_BCRYPT);
+
+    $sql = "INSERT INTO students (fname, mname, lname, email, password_hash, phone, address) 
+            VALUES ('$fname', '$mname', '$lname', '$email', '$password_hash', '$phone', '$address' )";
 
     if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Account Successfully Created'); window.location.href= 'index.php';</script>";
+        echo "<script>alert('Account created successfully!'); window.location.href='index.php';</script>";
     } else {
-        echo "<script>alert('error: " . $conn->error . "');</script>";
+        echo "<script>alert('Error: " . $conn->error . "');</script>";
     }
 }
 
-$conn->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title >DCE</title>
+    <title>DCE</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/dan.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -56,275 +56,291 @@ $conn->close();
         <style>
             * {
                 margin: 0;
-                }
-            header {
-            position: sticky;
-            top: 0;
-            z-index: 1;
-            background-color: brown;
-            padding-bottom: 20px;
-            
             }
+
+            header {
+                position: sticky;
+                top: 0;
+                z-index: 1;
+                background-color: brown;
+                padding-bottom: 20px;
+
+            }
+
             .container {
-            display: flex;
-            margin-left: 20px;
-            margin-right: 20px;
-            gap: 30px;
+                display: flex;
+                margin-left: 20px;
+                margin-right: 20px;
+                gap: 30px;
             }
 
             header nav ul li {
-            display: inline-block;
-            padding: 10px;
-            margin-top: 20px;
+                display: inline-block;
+                padding: 10px;
+                margin-top: 20px;
             }
 
             .navbar .navbar-brand {
-            display: flex;
-            align-items: center;
-            
-         }
-            .navbar-brand  {
-            text-decoration: none;
-            gap: 20px;
+                display: flex;
+                align-items: center;
+
+            }
+
+            .navbar-brand {
+                text-decoration: none;
+                gap: 20px;
             }
 
             .navbar .navbar-brand img {
-            margin-left: 20px;
+                margin-left: 20px;
             }
 
             .navbar .navbar-brand span {
-            font-size: 18pt;
-            font-family: Georgia, serif;
-            font-weight: bold;
-            color: white;
+                font-size: 18pt;
+                font-family: Georgia, serif;
+                font-weight: bold;
+                color: white;
             }
 
-            .navbar-nav > li > a {
-            color: white !important;
-            font-weight: 500;
+            .navbar-nav>li>a {
+                color: white !important;
+                font-weight: 500;
             }
-            
+
             .label {
-            display: flex;
-            gap: 25px;
-            
+                display: flex;
+                gap: 25px;
+
             }
-            
+
             main {
-            background-color: white;
-            font-size: 15px;
-        
+                background-color: white;
+                font-size: 15px;
+
             }
 
             .sociallink2 img {
-            width: 30px;
-            border-radius: 20px;
-            border: none;
-            margin-inline: 2px;
-           
+                width: 30px;
+                border-radius: 20px;
+                border: none;
+                margin-inline: 2px;
+
             }
 
-            .headlines  a {
-            text-decoration: none;
-            color: white;
+            .headlines a {
+                text-decoration: none;
+                color: white;
             }
 
-            header ul li:hover{
-            background-color: rgba(246, 246, 252, 0.845);
-            color: black;
-            size: 10px;
-            border-radius: 4px;
-          
+            header ul li:hover {
+                background-color: rgba(246, 246, 252, 0.845);
+                color: black;
+                size: 10px;
+                border-radius: 4px;
+
             }
 
             .form-container {
-            background-color: brown;
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                background-color: brown;
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
 
             .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
+                text-align: center;
+                margin-bottom: 20px;
             }
 
             .form-group {
-            margin-bottom: 15px;
+                margin-bottom: 15px;
             }
 
             .form-group label {
-            display: block;
-            margin-bottom: 5px;
+                display: block;
+                margin-bottom: 5px;
             }
 
             .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
             }
 
             .submit-button input {
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-            width: 100%;
+                border: none;
+                padding: 10px;
+                border-radius: 4px;
+                background-color: #333;
+                color: white;
+                cursor: pointer;
+                width: 100%;
             }
 
             .submit-button input:hover {
-            background-color: #555;
+                background-color: #555;
             }
 
             @media screen and (max-width: 768px) {
-            /* Navbar adjustments */
-            .navbar-header {
-                float: none;
+
+                /* Navbar adjustments */
+                .navbar-header {
+                    float: none;
+                }
+
+                .navbar-toggle {
+                    display: block;
+                }
+
+                .navbar-collapse {
+                    border-top: 1px solid transparent;
+                    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                }
+
+                .navbar-collapse.collapse {
+                    display: none !important;
+                }
+
+                .navbar-collapse.collapse.in {
+                    display: block !important;
+                }
+
+                .navbar-nav {
+                    float: none !important;
+                    margin: 7.5px -15px;
+                }
+
+                .navbar-nav>li {
+                    float: none;
+                }
+
+                .navbar-nav>li>a {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+
+                /* Form adjustments */
+                .form-container {
+                    max-width: 90%;
+                    padding: 15px;
+                }
+
+                /* Social links in navbar */
+                .social-links ul {
+                    display: flex;
+                    justify-content: center;
+                    padding-left: 0;
+                }
             }
-            .navbar-toggle {
-                display: block;
-            }
-            .navbar-collapse {
-                border-top: 1px solid transparent;
-                box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-            }
-            .navbar-collapse.collapse {
-                display: none!important;
-            }
-            .navbar-collapse.collapse.in {
-                display: block!important;
-            }
-            .navbar-nav {
-                float: none!important;
-                margin: 7.5px -15px;
-            }
-            .navbar-nav > li {
-                float: none;
-            }
-            .navbar-nav > li > a {
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-            
-            /* Form adjustments */
-            .form-container {
-                max-width: 90%;
-                padding: 15px;
-            }
-            
-            /* Social links in navbar */
-            .social-links ul {
-                display: flex;
-                justify-content: center;
-                padding-left: 0;
-            }
-            }
-            
         </style>
         <!-- Navigation -->
-<nav class="navbar navbar-inverse" role="navigation">
-  <div class="container">
-    <!-- Mobile toggle -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.php">
-        <img src="images/dan.jpg" alt="Danfred Computer Engineering LTD Logo" width="100" height="auto">
-        <span>DCE</span>
-      </a>
-    </div>
-    <!-- Navigation Links -->
-    <div class="collapse navbar-collapse navbar-right" id="main-navbar">
-      <ul class="headlines">
-        <li><a href="home.php"><b>Home</b></a></li>
-        <li><a href="#attendance-list"><b>Attendance List</b></a></li>
-        <li><a href="#courses"><b>Courses</b></a></li>
-        <li><a href="#create-account"><b>Create Account</b></a></li>
-        <li><a href="#log-out"><b>Log Out</b></a></li>
-      </ul>
-    </div>
-
-        <div class="sociallink2">
-            <ul>
-                <li><a href="#" target="_blank"><img
-                            src="images/in.jpg" alt="Linkedin" width="100px" height="auto"></a></li>
-                <li> <a href="#" target="_blank">
-                        <img src="images/Facebook_icon_(black).svg.png" alt="Facebook" width="100px"
-                            height="auto">
-                    </a></li>
-                <li><a href="#" target="_blank">
-                        <img src="images/twitter.png" alt="Twitter" width="100px" height="auto">
-                    </a></Li>
-                <li><a href="#" target="_blank">
-                        <img src="images/instagram.png" alt="Instagram" width="100px" height="auto">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container">
+                <!-- Mobile toggle -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.php">
+                        <img src="images/dan.jpg" alt="Danfred Computer Engineering LTD Logo" width="100" height="auto">
+                        <span>DCE</span>
                     </a>
-                </Li>
-            </ul>
+                </div>
+                <!-- Navigation Links -->
+                <div class="collapse navbar-collapse navbar-right" id="main-navbar">
+                    <ul class="headlines">
+                        <li><a href="index.html"><b>Home</b></a></li>
+                        <li><a href="#attendance-list"><b>Attendance List</b></a></li>
+                        <li><a href="#courses"><b>Courses</b></a></li>
+                        <li><a href="#create-account"><b>Create Account</b></a></li>
+                        <li><a href="#log-out"><b>Log Out</b></a></li>
+                    </ul>
+                </div>
 
-        </div>
-    
+                <div class="sociallink2">
+                    <ul>
+                        <li><a href="#" target="_blank"><img src="images/in.jpg" alt="Linkedin" width="100px"
+                                    height="auto"></a></li>
+                        <li> <a href="#" target="_blank">
+                                <img src="images/Facebook_icon_(black).svg.png" alt="Facebook" width="100px"
+                                    height="auto">
+                            </a></li>
+                        <li><a href="#" target="_blank">
+                                <img src="images/twitter.png" alt="Twitter" width="100px" height="auto">
+                            </a></Li>
+                        <li><a href="#" target="_blank">
+                                <img src="images/instagram.png" alt="Instagram" width="100px" height="auto">
+                            </a>
+                        </Li>
+                    </ul>
+
+                </div>
+
         </nav>
 
     </header>
 
     <main>
-        
+
         <div class="form-container">
             <h2>Create your account</h2>
             <form action="" method="post">
                 <div class="form-group">
-                <label for="fname">First Name</label>
-                <input type="text" id="first_name" name="first_name" placeholder="First name" required>
+                    <label for="fname">First Name*</label>
+                    <input type="text" id="fname" name="fname" placeholder="First name" required>
                 </div>
                 <div class="form-group">
-                <label for="mname">Middle Name</label>
-                <input type="text" id = "middle_name" name = "middle_name" placeholder="Middle name">
+                    <label for="mname">Middle Name</label>
+                    <input type="text" id="mname" name="mname" placeholder="Middle name">
                 </div>
                 <div class="form-group">
-                <label for="lname">Last Name</label>
-                <input type="text" id = "last_name" name = "last_name" placeholder="Last name">
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lname" placeholder="Last name">
                 </div>
                 <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id = "email" name = "email" placeholder="Email" required>
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password*</label>
+                    <input type="password" id="password" name="password" placeholder="Enter a strong password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Phone number">
                 </div>
                 <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id = "password" name = "password" placeholder="Password" required>
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Address">
                 </div>
-                <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id = "phone_number" name = "phone_number" placeholder="Phone number">
-                </div>
-                <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" id = "address" name = "address" placeholder="Address">
-                </div>
+                
                 <div class="submit-button">
-                <input type="submit" value="Create Account">
+                    <input type="submit" value="Create Account">
                 </div>
             </form>
         </div>
 
-            
-                
-            
+
+
+
     </main>
 
     <footer>
-      <p>&copy; DCE. All rights reserved.</p>
-      <p><a href="rules-and-regulations.html">Student Rules and Regulations</a> | <a href="contact-us.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+        <p>&copy; DCE. All rights reserved.</p>
+        <p><a href="rules-and-regulations.html">Student Rules and Regulations</a> | <a href="contact-us.html">Contact
+                Us</a> | <a href="faq.html">FAQ</a></p>
 
     </footer>
 </body>
+
 </html>
