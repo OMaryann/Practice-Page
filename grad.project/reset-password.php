@@ -18,24 +18,27 @@ if ($conn->connect_error) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Piassword</title>
     <style>
-        .form-container {
-            background-color: brown;
-            padding: 25px;
-            width: 30%;
-            padding-bottom: 6%;
-            border-radius: 5px;
-            margin: 6% auto;
-            color: white;
+    .form-container {
+        background-color: white;
+        padding:25px;
+        width: 30%;
+        padding-bottom: 6%;
+        border-radius: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: brown;
         }
+
         h1 {
             text-align: center;
+            margin-top: 6%;
             color: brown;
             padding: 10px;
-        }
-    </style>
+         }
+
+</style>
 </head>
 <body>
-    <h2>Reset Your Password Here</h2>
 
     <?php if (!empty($success)): ?>
         <p style="color: green;"><?php echo $success; ?></p>
@@ -43,14 +46,24 @@ if ($conn->connect_error) {
         <p style="color: red;"><?php echo $error; ?></p>
     <?php endif; ?>
 
-    <form method="POST">
-        <label for="password">Type New Password:</label><br>
-        <input type="password" name="password" id="password" required autocomplete="new-password"><br><br>
-
-        <label for="confirm_password">Confirm New Password:</label><br>
-        <input type="password" name="confirm_password" id="confirm_password" required autocomplete="new-password"><br><br>
-
-        <input type="submit" value="Reset Password">
-    </form>
+    <h1>DCE</h1><br>
+        <div class="form-container">
+        <h2>Reset Password</h2><br>
+        <form action="mailto:" method=" post">
+            <div class="input">
+                <label for="new-password" required>  </label> 
+                <input type="password" style="width: 100%; height: 25px; " id="username" name="username" placeholder="New Password" ><br> <br>
+            </div>
+            <div class="input">
+                <label for="confirm-password"></label> 
+                <input type="password" style="width: 100%; height: 25px;" id="password" name="password" placeholder="Confirm Password"><br> 
+            </div><br>
+            <div class="sendbotton">
+              <div>
+                <input type = "submit" value = "Submit"  style="border: none;  padding: 8px; border-radius: 4px; background-color: black; color: white; cursor: pointer;">
+              </div>
+              
+            </div>
+        </form>
 </body>
 </html>
