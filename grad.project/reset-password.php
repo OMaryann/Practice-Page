@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Reset Password</title>
 </head>
 <body>
-    <h2>Reset Your Password</h2>
+    <h2>Reset Your Password Here</h2>
 
     <?php if (!empty($success)): ?>
         <p style="color: green;"><?php echo $success; ?></p>
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php endif; ?>
 
     <form method="POST">
-        <label for="password">New Password:</label><br>
+        <label for="password">Type New Password:</label><br>
         <input type="password" name="password" id="password" required autocomplete="new-password"><br><br>
 
         <label for="confirm_password">Confirm New Password:</label><br>
