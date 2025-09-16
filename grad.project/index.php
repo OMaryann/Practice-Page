@@ -204,11 +204,11 @@ $conn->close();
       <!-- MODALS -->
       <div id="fp-modal" class="modal">
         <div class="modal-content">
-          <a href="forgot_password.php" class="fp">&times;</a>
+          <a href="forgot-password.php" class="fp">&times;</a>
           <h4>Forgot Password</h4>
-          <form id="form">
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required style="width: 250px; height: 25px;"><br>
+          <form id="form" action="forgot-password.php" method="POST">
+            <label for="forgot_email">Email Address:</label>
+            <input type="email" id="forgot_email" name="email" required style="width: 250px; height: 25px;"><br>
             <button type="submit" class="summit">Reset Password</button>
           </form>
         </div>

@@ -12,4 +12,12 @@ CREATE TABLE students (
     address VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     password_hash VARCHAR(30)
+); 
+
+CREATE TABLE password_resets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
