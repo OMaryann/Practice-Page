@@ -35,24 +35,22 @@ if ($conn->connect_error) {
     </style>
 </head>
 <body>
-    <main>
-        <h1>DCE</h1><br>
-        <div class="form-container">
-            <h2>ResetYour Password</h2><br>
-            <form method="post">
-                <div class="input">
-                    <label for="new-password">New Password:</label> 
-                    <input type="password" id="new-password" name="new_password" placeholder="New Password" required><br><br>
-                </div>
-                <div class="input">
-                    <label for="confirm-password">Confirm Password:</label> 
-                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm Password" required><br><br>
-                </div>
-                <div class="sendbutton">
-                    <input type="submit" value="Submit" style="border: none; padding: 8px; border-radius: 4px; background-color: black; color: white; cursor: pointer;">
-                </div>
-            </form>
-        </div>
-    </main>
+    <h2>Reset Your Password Here</h2>
+
+    <?php if (!empty($success)): ?>
+        <p style="color: green;"><?php echo $success; ?></p>
+    <?php elseif (!empty($error)): ?>
+        <p style="color: red;"><?php echo $error; ?></p>
+    <?php endif; ?>
+
+    <form method="POST">
+        <label for="password">Type New Password:</label><br>
+        <input type="password" name="password" id="password" required autocomplete="new-password"><br><br>
+
+        <label for="confirm_password">Confirm New Password:</label><br>
+        <input type="password" name="confirm_password" id="confirm_password" required autocomplete="new-password"><br><br>
+
+        <input type="submit" value="Reset Password">
+    </form>
 </body>
 </html>
