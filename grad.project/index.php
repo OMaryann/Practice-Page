@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $conn->real_escape_string($_POST['password']);
 
     // Fetch user by email
-    $sql = "SELECT id, fname, password_hash FROM students WHERE email = '$email' LIMIT 1";
+    $sql = "SELECT id, fname, password_hash FROM student WHERE email = '$email' LIMIT 1";
     $result = $conn->query($sql);
 
     if ($result && $result->num_rows == 1) 
