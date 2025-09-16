@@ -38,7 +38,7 @@ if ($conn->connect_error) {
     <main>
         <h1>DCE</h1><br>
         <div class="form-container">
-            <h2>Reset Password</h2><br>
+            <h2>ResetYour Password</h2><br>
             <form method="post">
                 <div class="input">
                     <label for="new-password">New Password:</label> 
