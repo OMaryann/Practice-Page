@@ -48,7 +48,7 @@ if ($conn->connect_error) {
 
     <h1>DCE</h1><br>
         <div class="form-container">
-        <h2>Reset Password</h2><br>
+        <h2>Reset Your Password</h2><br>
         <form action="mailto:" method=" post">
             <div class="input">
                 <label for="new-password" required>  </label> 
