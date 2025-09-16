@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Piassword</title>
+    <title>Reset Password</title>
     <style>
     .form-container {
         background-color: white;
