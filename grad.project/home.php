@@ -69,7 +69,7 @@ session_start();
         </p>
         <div class="join-us">
         <a href="create-account.php"><h3>JOIN US NOW!</h3></a>
-        <a href="login.html"><h3>ALREADY A MEMBER- LOG IN</h3></a>
+        <a href="index.php"><h3>ALREADY A MEMBER- LOG IN</h3></a>
         </div>
     </main>
 
