@@ -163,10 +163,39 @@ $conn->close();
 
   </header>
 
+<<<<<<< HEAD
+      <main>
+        <h1>DCE</h1><br>
+        <div class="form-container">
+        <h2>Login</h2><br><br>
+        <p1>Sign in to start your session</p1><br><br>
+        <form action="" method="post">
+            <div class="input">
+                <label for="email" required><i class="material-icons">email</i>  </label> 
+                <input type="email" style="width: 125%; height: 25px; " id="email" name="email" placeholder="Email" ><br> <br><br>
+            </div>
+            <div class="input">
+                <label for="password"><i class="material-icons">lock</i></label> 
+                <input type="password" style="width: 125%; height: 25px;" id="password" name="password" placeholder="Password"><br> <br>
+            </div><br>
+            <div class="sendbotton">
+              <div>
+                <input type = "submit" value = "Login"  style="border: none;  padding: 8px; border-radius: 4px; background-color: black; color: white; cursor: pointer;">
+              </div>
+              <div class="fp-card">
+                <a href="create-account.php" style="text-decoration: none; padding-top: 15px; color: black; font-size: 12px;">Create Account</a>
+              </div>
+              <div class="fp-card" id="fgp-card" >
+                <a href="#fp-modal"  style="text-decoration: none; padding-top: 15px; color: black; font-size: 12px;">Forgot Password</a>
+            </div>
+            </div>
+        </form>
+=======
   <main>
     <h1>DCE</h1><br>
     <div class="form-container">
       <h2>Login</h2><br><br>
+>>>>>>> 6693054b1ff5486bc83da317c14b753abb7b1e52
 
       <?php if (!empty($error)): ?>
         <p style="color:red;"><?php echo $error; ?></p>
