@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Content
             $mail->isHTML(true);
             $mail->Subject = 'Password Reset Link';
-            $reset_link = "http://localhost/PracticePage/Practice-Page/grad.project/reset-password.php?token=$token";
+            $reset_link = "http://localhost/Practice-Page/grad.project/reset-password.php?token=$token";
             $mail->Body = "
                 <p>Hello,</p>
                 <p>Click the link below to reset your password. This link expires in 1 hour:</p>
